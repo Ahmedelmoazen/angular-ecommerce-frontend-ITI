@@ -1,0 +1,33 @@
+<!-- Register -->
+<div class="container">
+    <form #myForm='ngForm' class="login">
+        <h4 class="login__header">
+            Register An Account
+        </h4>
+        <div class="form-group" [ngClass]="{ 'invalid': emailInput.invalid && emailInput.touched}">
+            <label for="">E-mail Address</label>
+            
+            <input #emailInput='ngModel' [(ngModel)]='user.email' required pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" class="form-control"  type="email" name="email" id="">
+        </div>
+        <div class="form-row">
+            <div class="form-group" [ngClass]="{ 'invalid': passwordInput.invalid && passwordInput.touched}">
+                <label for="">Password</label>
+                <input #passwordInput='ngModel' [(ngModel)]='user.password'  required pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" class="form-control" type="text" name="password" id="">
+            </div>
+            <div class="form-group" [ngClass]="{ 'invalid': ((passwordInput.value !== passwordInput2.value && passwordInput2.touched) || (passwordInput2.invalid && passwordInput2.touched))}">
+                <label for="">Re-enter Password</label>
+                <input #passwordInput2='ngModel' [(ngModel)]='user.repeatedPassword' required pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" class="form-control" type="text" name="repeatedPassword" id="">
+            </div>
+        </div>
+        <span [hidden]='!(passwordInput.invalid && passwordInput.touched)' style="color: rgb(201, 20, 20);">Password must be 8 charachters or more with at least one alphabet and one digit!!</span>
+        <span [hidden]='!((passwordInput.value !== passwordInput2.value && passwordInput2.touched) || (passwordInput2.invalid && passwordInput2.touched))' style="color: rgb(201, 20, 20);">Passwords are not matching!!</span>
+        
+        <div class="login__remember-me">
+            <div class="add-product__actions">
+                <button routerLink='/home' href="#" class="btn btn--gray">Cancel</button>
+                <button (click)='onSubmit()' [disabled]="myForm.invalid || passwordInput.value !== passwordInput2.value" href="#" class="btn btn--primary">Register</button>
+            </div>
+        </div>
+        <a href="#" routerLink='/login' class="login__register-now">You are alredy a member?</a>
+    </form>
+</div>

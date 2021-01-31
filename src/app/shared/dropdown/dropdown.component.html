@@ -1,0 +1,14 @@
+<!-- to oppen dropdown dropdown--opened -->
+<div  [ngClass]="{'dropdown--opened': status}" class="dropdown dropdown--left">
+    <!-- header -->
+    <div (click)='status = !status' class="dropdown__header">
+        <ng-content select='.header'></ng-content>
+
+    </div>
+
+    <!-- items -->
+    <div class="dropdown__body">
+        <ng-content select='.body'></ng-content>
+
+    </div>
+</div>
